@@ -1,0 +1,29 @@
+<h2>Admin Dashboard</h2>
+
+<h3>Airplanes</h3>
+<a href="{% url 'add_airplane' %}">Add Airplane</a>
+<ul>
+  {% for a in airplanes %}
+    <li>
+      {{ a.model_name }} (Capacity: {{ a.capacity }})
+      <a href="{% url 'edit_airplane' a.id %}">Edit</a>
+      <a href="{% url 'delete_airplane' a.id %}">Delete</a>
+    </li>
+  {% empty %}
+    <li>No airplanes added yet.</li>
+  {% endfor %}
+</ul>
+
+<h3>Flights</h3>
+<a href="{% url 'add_flight' %}">Add Flight</a>
+<ul>
+  {% for f in flights %}
+    <li>
+      {{ f.flight_no }}: {{ f.source }} → {{ f.destination }} | {{ f.airplane.model_name }}
+      <a href="{% url 'edit_flight' f.id %}">Edit</a>
+      <a href="{% url 'delete_flight' f.id %}">Delete</a>
+    </li>
+  {% empty %}
+    <li>No flights scheduled yet.</li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,27 @@
+<h2>Add Flight</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Flight No:</label>
+    <input type="text" name="flight_no" required><br>
+
+    <label>Source:</label>
+    <input type="text" name="source" required><br>
+
+    <label>Destination:</label>
+    <input type="text" name="destination" required><br>
+
+    <label>Departure Time:</label>
+    <input type="datetime-local" name="departure_time" required><br>
+
+    <label>Arrival Time:</label>
+    <input type="datetime-local" name="arrival_time" required><br>
+
+    <label>Airplane:</label>
+    <select name="airplane" required>
+        {% for a in airplanes %}
+            <option value="{{ a.id }}">{{ a.model_name }}</option>
+        {% endfor %}
+    </select><br>
+
+    <button type="submit">Add Flight</button>
+</form>

@@ -1,0 +1,8 @@
+<h2>Passenger Dashboard</h2>
+<p>Welcome {{ request.user.username }}!</p>
+
+<ul>
+  <li><a href="{% url 'search_flights' %}">Search & Book Flights</a></li>
+  <li><a href="{% url 'booking_history' %}">View My Bookings</a></li>
+
+</ul>

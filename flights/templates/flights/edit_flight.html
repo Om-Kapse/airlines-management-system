@@ -1,0 +1,27 @@
+<h2>Edit Flight</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Flight No:</label>
+    <input type="text" name="flight_no" value="{{ flight.flight_no }}" required><br>
+
+    <label>Source:</label>
+    <input type="text" name="source" value="{{ flight.source }}" required><br>
+
+    <label>Destination:</label>
+    <input type="text" name="destination" value="{{ flight.destination }}" required><br>
+
+    <label>Departure Time:</label>
+    <input type="datetime-local" name="departure_time" value="{{ flight.departure_time|date:'Y-m-d\TH:i' }}" required><br>
+
+    <label>Arrival Time:</label>
+    <input type="datetime-local" name="arrival_time" value="{{ flight.arrival_time|date:'Y-m-d\TH:i' }}" required><br>
+
+    <label>Airplane:</label>
+    <select name="airplane" required>
+        {% for a in airplanes %}
+            <option value="{{ a.id }}" {% if a.id == flight.airplane.id %}selected{% endif %}>{{ a.model_name }}</option>
+        {% endfor %}
+    </select><br>
+
+    <button type="submit">Save</button>
+</form>

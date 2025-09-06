@@ -1,0 +1,11 @@
+<h2>Staff Dashboard – Today's Flights</h2>
+<ul>
+  {% for f in flights %}
+    <li>
+      {{ f.flight_no }}: {{ f.source }} → {{ f.destination }}
+      <a href="{% url 'flight_passengers' f.id %}">View Passengers</a>
+    </li>
+  {% empty %}
+    <li>No flights today.</li>
+  {% endfor %}
+</ul>

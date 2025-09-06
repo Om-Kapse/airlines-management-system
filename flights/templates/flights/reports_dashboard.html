@@ -1,0 +1,13 @@
+<h2>Admin Reports</h2>
+
+<p><strong>Daily Bookings:</strong> {{ daily_bookings }}</p>
+<p><strong>Revenue Today:</strong> ${{ revenue_today }}</p>
+
+<h3>Most Popular Routes</h3>
+<ul>
+  {% for r in popular_routes %}
+    <li>{{ r.flight__source }} → {{ r.flight__destination }} ({{ r.total }} bookings)</li>
+  {% empty %}
+    <li>No bookings yet.</li>
+  {% endfor %}
+</ul>

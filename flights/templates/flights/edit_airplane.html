@@ -1,0 +1,9 @@
+<h2>Edit Airplane</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Model Name:</label>
+    <input type="text" name="model_name" value="{{ airplane.model_name }}" required>
+    <label>Capacity:</label>
+    <input type="number" name="capacity" value="{{ airplane.capacity }}" required>
+    <button type="submit">Save</button>
+</form>

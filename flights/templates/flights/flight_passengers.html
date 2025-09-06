@@ -1,0 +1,15 @@
+<h2>Passengers – Flight {{ flight.flight_no }}</h2>
+<ul>
+  {% for b in bookings %}
+    <li>
+      {{ b.passenger.username }} 
+      {% if b.checked_in %}
+        ✅ Checked In
+      {% else %}
+        <a href="{% url 'checkin_passenger' b.id %}">Check-In</a>
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>No bookings for this flight.</li>
+  {% endfor %}
+</ul>

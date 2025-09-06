@@ -1,0 +1,16 @@
+<h2>My Bookings</h2>
+<ul>
+  {% for b in bookings %}
+    <li>
+      Flight {{ b.flight.flight_no }}: {{ b.flight.source }} → {{ b.flight.destination }}
+      ({{ b.booking_date|date:"Y-m-d H:i" }})
+      {% if not b.checked_in %}
+        <a href="{% url 'cancel_booking' b.id %}">Cancel</a>
+      {% else %}
+        ✅ Checked In (cannot cancel)
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>No bookings found.</li>
+  {% endfor %}
+</ul>

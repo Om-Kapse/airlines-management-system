@@ -20,7 +20,7 @@ It allows passengers to search flights, book tickets, cancel bookings, and view 
 ## 🔧 Setup Instructions
 ```bash
 # 1. Clone repo
-git clone https://github.com/yourusername/airlines-management-system.git
+git clone https://github.com/Om-Kapse/airlines-management-system.git
 cd airlines-management-system
 
 # 2. Create virtual environment

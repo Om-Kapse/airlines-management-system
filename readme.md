@@ -36,12 +36,3 @@ python manage.py migrate
 
 # 5. Start server
 python manage.py runserver
-
-
----
-
-## 7. Add Requirements File
-Generate `requirements.txt`:
-
-```bash
-pip freeze > requirements.txt

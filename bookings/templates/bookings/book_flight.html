@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
 <h2>Book Flight {{ flight.flight_no }}</h2>
 <form method="post">
     {% csrf_token %}
@@ -5,3 +7,4 @@
     <input type="text" name="seat_no">
     <button type="submit">Confirm Booking</button>
 </form>
+{% endblock %}

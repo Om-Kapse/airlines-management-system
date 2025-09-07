@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 <!-- <h2>My Booking History</h2>
 
 {% if bookings %}
@@ -30,7 +31,7 @@
 {% else %}
     <p>No bookings yet.</p>
 {% endif %} -->
-
+{% block content %}
 <h2>My Bookings</h2>
 <ul>
   {% for b in bookings %}
@@ -47,3 +48,4 @@
     <li>No bookings found.</li>
   {% endfor %}
 </ul>
+{% endblock %}

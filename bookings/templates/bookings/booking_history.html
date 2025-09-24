@@ -1,51 +1,42 @@
 {% extends "base.html" %}
-<!-- <h2>My Booking History</h2>
 
-{% if bookings %}
-    <table border="1">
-        <tr>
-            <th>Flight No</th>
-            <th>Route</th>
-            <th>Seat</th>
-            <th>Status</th>
-            <th>Booking Date</th>
-            <th>Action</th>
+{% block content %}
+<div style="max-width: 800px; margin: 30px auto; background: #f9f9f9; padding: 20px; border-radius: 8px;">
+  <h2 style="text-align:center; margin-bottom:20px;">My Bookings</h2>
+
+  {% if bookings %}
+    <table style="width:100%; border-collapse: collapse;">
+      <thead>
+        <tr style="background:#007bff; color:white; text-align:left;">
+          <th style="padding:10px; border:1px solid #ddd;">Flight No</th>
+          <th style="padding:10px; border:1px solid #ddd;">Origin → Destination</th>
+          <th style="padding:10px; border:1px solid #ddd;">Date & Time</th>
+          <th style="padding:10px; border:1px solid #ddd;">Seat No</th>
+          <th style="padding:10px; border:1px solid #ddd;">Booking Date</th>
+          <th style="padding:10px; border:1px solid #ddd;">Checked In</th>
         </tr>
-        {% for b in bookings %}
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
         <tr>
-            <td>{{ b.flight.flight_no }}</td>
-            <td>{{ b.flight.source }} → {{ b.flight.destination }}</td>
-            <td>{{ b.seat_no }}</td>
-            <td>{{ b.status }}</td>
-            <td>{{ b.booking_date }}</td>
-            <td>
-                {% if b.status == "confirmed" %}
-                    <a href="{% url 'cancel_booking' b.id %}">Cancel</a>
-                {% else %}
-                    -
-                {% endif %}
-            </td>
+          <td style="padding:10px; border:1px solid #ddd;">{{ booking.flight.flight_number }}</td>
+          <td style="padding:10px; border:1px solid #ddd;">{{ booking.flight.origin }} → {{ booking.flight.destination }}</td>
+          <td style="padding:10px; border:1px solid #ddd;">{{ booking.flight.departure_time }}</td>
+          <td style="padding:10px; border:1px solid #ddd;">{{ booking.seat_no }}</td>
+          <td style="padding:10px; border:1px solid #ddd;">{{ booking.booking_date|date:"Y-m-d H:i" }}</td>
+          <td style="padding:10px; border:1px solid #ddd;">
+            {% if booking.checked_in %}
+              ✅ Yes
+            {% else %}
+              ❌ No
+            {% endif %}
+          </td>
         </tr>
         {% endfor %}
+      </tbody>
     </table>
-{% else %}
-    <p>No bookings yet.</p>
-{% endif %} -->
-{% block content %}
-<h2>My Bookings</h2>
-<ul>
-  {% for b in bookings %}
-    <li>
-      Flight {{ b.flight.flight_no }}: {{ b.flight.source }} → {{ b.flight.destination }}
-      ({{ b.booking_date|date:"Y-m-d H:i" }})
-      {% if not b.checked_in %}
-        <a href="{% url 'cancel_booking' b.id %}">Cancel</a>
-      {% else %}
-        ✅ Checked In (cannot cancel)
-      {% endif %}
-    </li>
-  {% empty %}
-    <li>No bookings found.</li>
-  {% endfor %}
-</ul>
+  {% else %}
+    <p style="text-align:center;">You don’t have any bookings yet.</p>
+  {% endif %}
+</div>
 {% endblock %}

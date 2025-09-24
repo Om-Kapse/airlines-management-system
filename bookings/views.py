@@ -51,11 +51,13 @@ def book_flight(request, flight_id):
 
 
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 
 @login_required
 def booking_history(request):
-    bookings = Booking.objects.filter(passenger=request.user).select_related("flight")
+    bookings = request.user.booking_set.select_related("flight")  # fetch related flight details
     return render(request, "bookings/booking_history.html", {"bookings": bookings})
+
 
 # @login_required
 # def cancel_booking(request, booking_id):

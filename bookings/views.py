@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from flights.models import Flight
 from flights.models import Booking
-
+from django.contrib import messages
 
 @login_required
 def search_flights(request):
@@ -17,12 +17,38 @@ def search_flights(request):
 def book_flight(request, flight_id):
     flight = get_object_or_404(Flight, id=flight_id)
 
+    capacity = flight.airplane.capacity
+    booked_seats = list(flight.bookings.values_list('seat_no', flat=True))
+
+    # Generate seat numbers (list of integers 1..capacity)
+    seat_numbers = list(range(1, capacity + 1))
+
     if request.method == "POST":
         seat_no = request.POST.get("seat_no")
-        Booking.objects.create(passenger=request.user, flight=flight, seat_no=seat_no)
-        return redirect("passenger_dashboard")
+        if seat_no in booked_seats:
+            return render(request, "bookings/book_flight.html", {
+                "flight": flight,
+                "seat_numbers": seat_numbers,
+                "booked_seats": booked_seats,
+                "error": f"Seat {seat_no} is already booked!"
+            })
 
-    return render(request, "bookings/book_flight.html", {"flight": flight})
+        Booking.objects.create(
+            passenger=request.user,
+            flight=flight,
+            seat_no=seat_no
+        )
+        messages.success(request, f"✅ Seat {seat_no} booked successfully!")
+        return redirect("booking_history")
+
+    return render(request, "bookings/book_flight.html", {
+        "flight": flight,
+        "seat_numbers": seat_numbers,
+        "booked_seats": booked_seats
+    })
+
+
+
 
 from django.contrib.auth.decorators import login_required
 

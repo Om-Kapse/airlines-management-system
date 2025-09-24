@@ -1,9 +1,55 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h2>Signup</h2>
-<form method="post">
+<h2>Sign Up</h2>
+
+<form method="post" class="signup-form">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Register</button>
 </form>
+
+<style>
+  .signup-form {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+  }
+
+  .signup-form p {
+    margin-bottom: 15px;
+  }
+
+  .signup-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .signup-form input, 
+  .signup-form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+  }
+
+  .signup-form button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .signup-form button:hover {
+    background: #555;
+  }
+</style>
 {% endblock %}

@@ -23,10 +23,11 @@ class Flight(models.Model):
 
 class Booking(models.Model):
     passenger = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
+    flight = models.ForeignKey(Flight, on_delete=models.CASCADE, related_name="bookings")
     booking_date = models.DateTimeField(auto_now_add=True)
     checked_in = models.BooleanField(default=False)  # ✅ NEW
-    seat_no = models.CharField(max_length=10, null=True, blank=True)  # ✅ add this
+    seat_no = models.CharField(max_length=5,)  # ✅ add this
+
 
     def __str__(self):
         return f"{self.passenger.username} booked {self.flight.flight_no} (Seat {self.seat_no or 'TBD'})"

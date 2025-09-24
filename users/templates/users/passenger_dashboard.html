@@ -1,6 +1,20 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<div class="dashboard-container">
+  <h2>Passenger Dashboard</h2>
+  <p>Welcome, <strong>{{ request.user.username }}</strong> ✈️</p>
+  <ul class="dashboard-links">
+    <li><a href="{% url 'search_flights' %}">🔍 Search & Book Flights</a></li>
+    <li><a href="{% url 'booking_history' %}">📖 My Bookings</a></li>
+  </ul>
+</div>
+{% endblock %}
+<!-- 
+
   <h2>Passenger Dashboard</h2>
   <p>Welcome {{ request.user.username }}!</p>
 
@@ -12,4 +26,4 @@
 
 
 
-{% endblock %}
+ -->
